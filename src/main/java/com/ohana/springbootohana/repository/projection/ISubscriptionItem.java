@@ -2,7 +2,7 @@ package com.ohana.springbootohana.repository.projection;
 
 import java.time.LocalDateTime;
 
-public interface SubscriptionItem
+public interface ISubscriptionItem
 {
     String getActivityname();
     String getDate();

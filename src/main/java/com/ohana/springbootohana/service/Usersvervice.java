@@ -2,7 +2,7 @@ package com.ohana.springbootohana.service;
 
 import com.ohana.springbootohana.model.Role;
 import com.ohana.springbootohana.model.User;
-import com.ohana.springbootohana.repository.UserRepository;
+import com.ohana.springbootohana.repository.IUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -14,7 +14,7 @@ import java.util.Optional;
 @Service
 public class Usersvervice implements IUserService {
     @Autowired
-    private UserRepository userRepository;
+    private IUserRepository IUserRepository;
 
     private PasswordEncoder passwordEncoder;
 
@@ -24,20 +24,20 @@ public class Usersvervice implements IUserService {
         user.setRole(Role.USER);
         user.setCreateTime(LocalDateTime.now());
 
-        return userRepository.save(user);
+        return IUserRepository.save(user);
 
     }
 
     @Override
     public Optional<User> findByUsername(String username)
     {
-        return userRepository.findByUsername(username);
+        return IUserRepository.findByUsername(username);
     }
 
     @Override
     @Transactional //TransactionalRequired when executing an update/delete query
     public void makeAdmin(String username)
     {
-        userRepository.updateUserRole(username, Role.ADMIN);
+        IUserRepository.updateUserRole(username, Role.ADMIN);
     }
 }
